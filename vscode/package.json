@@ -1,0 +1,76 @@
+{
+  "name": "complianceki-scanner",
+  "displayName": "ComplianceKI Scanner",
+  "description": "Scan your code for GDPR and EU AI Act compliance violations",
+  "version": "0.1.0",
+  "publisher": "compliancekibot",
+  "license": "SEE LICENSE IN LICENSE",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/compliancekibot/complianceki-docs"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": [
+    "Linters",
+    "Security",
+    "Other"
+  ],
+  "keywords": [
+    "gdpr",
+    "compliance",
+    "dsgvo",
+    "privacy",
+    "ai-act"
+  ],
+  "activationEvents": [
+    "onCommand:complianceki.scanWorkspace",
+    "onCommand:complianceki.scanFile",
+    "onCommand:complianceki.viewResults",
+    "onCommand:complianceki.setApiKey"
+  ],
+  "main": "./src/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "complianceki.scanWorkspace",
+        "title": "ComplianceKI: Scan Workspace"
+      },
+      {
+        "command": "complianceki.scanFile",
+        "title": "ComplianceKI: Scan Current File"
+      },
+      {
+        "command": "complianceki.viewResults",
+        "title": "ComplianceKI: View Results"
+      },
+      {
+        "command": "complianceki.setApiKey",
+        "title": "ComplianceKI: Set API Key"
+      }
+    ],
+    "configuration": {
+      "title": "ComplianceKI",
+      "properties": {
+        "complianceki.apiUrl": {
+          "type": "string",
+          "default": "https://api.compliancekibot.de",
+          "description": "ComplianceKIbot.de API URL"
+        },
+        "complianceki.mode": {
+          "type": "string",
+          "enum": ["assessment_only", "full_implementation"],
+          "default": "assessment_only",
+          "description": "Scan mode"
+        },
+        "complianceki.failOnSeverity": {
+          "type": "string",
+          "enum": ["none", "critical", "high"],
+          "default": "none",
+          "description": "Show diagnostic errors for findings at this severity or above"
+        }
+      }
+    }
+  }
+}

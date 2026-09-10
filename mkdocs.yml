@@ -1,0 +1,30 @@
+site_name: ComplianceKIbot.de — Developer Docs
+site_url: https://compliancekibot.github.io/complianceki-docs/
+site_description: Developer documentation for ComplianceKIbot.de — SDK, VSCode extension, CI/CD integrations, API and changelog.
+repo_url: https://github.com/compliancekibot/complianceki-docs
+edit_uri: edit/main/docs/
+docs_dir: docs
+theme:
+  name: material
+  language: en
+  feature:
+    - navigation.instant
+    - navigation.tracking
+    - search.highlight
+  palette:
+    - scheme: default
+      primary: blue
+      accent: blue
+nav:
+  - Home: index.md
+  - User Guide: user-guide.md
+  - API Reference: api-reference.md
+  - CI/CD Integration: ci-cd-integration.md
+  - CI/CD-Integration (DE): ci-cd-integration.de.md
+  - Changelog: CHANGELOG.md
+markdown_extensions:
+  - admonition
+  - codehilite
+  - tables
+  - toc:
+      permalink: true

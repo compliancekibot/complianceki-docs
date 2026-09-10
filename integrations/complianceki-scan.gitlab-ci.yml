@@ -1,0 +1,65 @@
+# ComplianceKIbot.de — GitLab CI · compliance scan
+# Include this pipeline for every merge request (and the default branch):
+#
+#     include:
+#       - project: 'compliancekibot/complianceki-docs'
+#         file: '/integrations/complianceki-scan.gitlab-ci.yml'
+#
+# Required CI/CD variables:
+#   COMPLIANCEKI_API_KEY   -> your ComplianceKI API key (Settings -> CI/CD -> Variables)
+# Optional:
+#   COMPLIANCEKI_BASE_URL  -> default https://api.compliancekibot.de
+#   COMPLIANCEKI_MODE      -> "assessment_only" (default) or "full_implementation"
+
+stages:
+  - compliance
+
+complianceki-scan:
+  stage: compliance
+  image: python:3.12-slim
+  variables:
+    PIP_NO_CACHE_DIR: "1"
+    COMPLIANCEKI_BASE_URL: "https://api.compliancekibot.de"
+    COMPLIANCEKI_MODE: "assessment_only"
+    COMPLIANCEKI_FAIL_ON: "high"     # fail the pipeline on findings at/above this severity ("" = never fail)
+  before_script:
+    - pip install --quiet --disable-pip-version-check complianceki-sdk
+  script:
+    - |
+      python - <<'PY'
+      import os, sys
+      from complianceki import ComplianceKI
+
+      base = os.environ.get("COMPLIANCEKI_BASE_URL", "https://api.compliancekibot.de")
+      api_key = os.environ.get("COMPLIANCEKI_API_KEY")
+      if not api_key:
+          sys.exit("ERROR: COMPLIANCEKI_API_KEY is required")
+      fail_on = os.environ.get("COMPLIANCEKI_FAIL_ON", "high")
+
+      client = ComplianceKI(base_url=base, api_key=api_key)
+      run = client.create_run(repo_ref=os.environ["CI_PROJECT_URL"],
+                              mode=os.environ.get("COMPLIANCEKI_MODE", "assessment_only"))
+      print(f"run={run.id} status={run.status}")
+
+      run = client.wait_for_run(run.id, poll_interval=10)
+      if run.status != "completed":
+          sys.exit(f"ERROR: scan did not complete (status={run.status})")
+
+      summary = client.get_run_summary(run.id)
+      print(f"findings={summary.findings_total} data_flows={summary.data_flows} "
+            f"ai_models={summary.ai_models} documents={summary.documents}")
+
+      levels = ["critical", "high", "medium", "low", "info"]
+      threshold = levels.index(fail_on) if fail_on in levels else 1  # default = high
+      failures = 0
+      for sev in levels[: threshold + 1]:
+          for f in client.list_findings(run_id=run.id, severity=sev):
+              print(f"::{sev} {f.title} @ {f.file_path or '?'} (score {f.risk_score})")
+              failures += 1
+      if fail_on and failures:
+          sys.exit(f"ERROR: {failures} finding(s) at/above '{fail_on}'")
+      print("Compliance scan passed")
+      PY
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'

@@ -1,0 +1,15 @@
+# ComplianceKI GitHub App — Pull Request Scanner
+
+name: ComplianceKI Scanner
+description: Automated compliance scanning for pull requests
+url: https://github.com/apps/complianceki-scanner
+hook_attributes:
+  url: https://api.compliancekibot.de/api/v1/webhooks/github
+permissions:
+  pull_requests: write
+  checks: write
+  contents: read
+  metadata: read
+events:
+  - pull_request
+  - pull_request_review

@@ -1,0 +1,25 @@
+# Python
+__pycache__/
+*.py[cod]
+build/
+dist/
+*.egg-info/
+.venv/
+venv/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+
+# Node / VS Code extension
+node_modules/
+*.vsix
+.vscode/*.log
+
+# Build / tooling output
+.vite/
+.astro/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
