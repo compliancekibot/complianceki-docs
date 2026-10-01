@@ -97,7 +97,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: compliancekibot/complianceki-docs/integrations@v1     # reusable action
+      - uses: compliancekibot/complianceki-docs/integrations@main    # reusable action
         with:
           api-key: ${{ secrets.COMPLIANCEKI_API_KEY }}
           mode: assessment_only

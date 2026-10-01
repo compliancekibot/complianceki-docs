@@ -12,7 +12,7 @@ deployed website — landing pages, legal pages, app UI — are closed source an
 |---|---|
 | [`sdk/`](./sdk) | **Python SDK** (`complianceki-sdk`) — programmatic client for the ComplianceKI API |
 | [`vscode/`](./vscode) | **VSCode extension** — scan files/workspaces and see findings inline |
-| [`integrations/`](./integrations) | **CI/CD integrations** — GitLab CI template + GitHub App (with a reusable `complianceki-scan@v1` GitHub Action) |
+| [`integrations/`](./integrations) | **CI/CD integrations** — GitLab CI template + GitHub App (with a reusable `complianceki-scan` GitHub Action) |
 | [`docs/`](./docs) | **Developer documentation** — API reference, SDK user guide and the public CHANGELOG (the end-user site docs, "how-to-use" plus FAQ, stay on the deployed website, which links here) |
 
 Everything here is licensed under **Apache-2.0** ([LICENSE](./LICENSE)).
@@ -65,7 +65,7 @@ Scan a file or the whole workspace and see ComplianceKI findings as inline diagn
   template: drop in your `.gitlab-ci.yml` and set `COMPLIANCEKI_API_KEY` / `COMPLIANCEKI_BASE_URL`.
 - **GitHub App** — [`integrations/github-app/`](./integrations/github-app) installs the GitHub App so
   PRs are scanned automatically and reported as check-runs.
-- **GitHub Action** — `uses: compliancekibot/complianceki-docs/integrations@v1` wraps the same scan in a reusable action.
+- **GitHub Action** — `uses: compliancekibot/complianceki-docs/integrations@main` wraps the same scan in a reusable action.
 
 ---
 
