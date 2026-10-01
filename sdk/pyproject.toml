@@ -14,10 +14,10 @@ license = "Apache-2.0"
 license-files = ["LICENSE"]
 requires-python = ">=3.10"
 authors = [
-    { name = "Slaveyko Kirilov Nikolov", email = "info@totema.de" },
+    { name = "Slaveyko Kirilov Nikolov", email = "contact@compliancekibot.de" },
 ]
 maintainers = [
-    { name = "ComplianceKIbot.de", email = "info@totema.de" },
+    { name = "ComplianceKIbot.de", email = "contact@compliancekibot.de" },
 ]
 keywords = ["compliance", "gdpr", "dsgvo", "eu-ai-act", "scanner", "sast", "security", "sdk"]
 classifiers = [
