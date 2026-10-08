@@ -55,7 +55,7 @@ function failOn() {
 async function apiKey() {
     let value = await ctx.secrets.get('complianceki.apiKey');
     if (value) return value;
-    value = await vscode.window.showInputBox({ prompt: 'Enter your ComplianceKIbot.de API key', password: true, ignoreFocusOut: true, placeHolder: 'ck_…' });
+    value = await vscode.window.showInputBox({ prompt: 'Enter your ComplianceKIbot.de licence key', password: true, ignoreFocusOut: true, placeHolder: 'E_… / S_… (dashboard → Lizenzen)' });
     if (value) await ctx.secrets.store('complianceki.apiKey', value);
     return value || '';
 }
@@ -101,10 +101,10 @@ async function scanFile() {
 }
 
 async function setApiKey() {
-    const key = await vscode.window.showInputBox({ prompt: 'Enter your ComplianceKIbot.de API key', password: true, ignoreFocusOut: true, placeHolder: 'ck_…' });
+    const key = await vscode.window.showInputBox({ prompt: 'Enter your ComplianceKIbot.de licence key', password: true, ignoreFocusOut: true, placeHolder: 'E_… / S_… (dashboard → Lizenzen)' });
     if (key) {
         await ctx.secrets.store('complianceki.apiKey', key);
-        vscode.window.showInformationMessage('ComplianceKI API key saved.');
+        vscode.window.showInformationMessage('ComplianceKI licence key saved.');
     }
 }
 
