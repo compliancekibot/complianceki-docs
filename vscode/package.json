@@ -4,7 +4,7 @@
   "description": "Scan your code for GDPR and EU AI Act compliance violations",
   "version": "0.1.0",
   "publisher": "compliancekibot",
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "Apache-2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/compliancekibot/complianceki-docs"
