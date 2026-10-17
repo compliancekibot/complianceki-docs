@@ -2,7 +2,7 @@
 
 ComplianceKI scans a repository for GDPR (DSGVO) and EU AI Act obligations, maps findings to 45 legal
 rules, and generates the relevant audit documents. The product deterministically runs local SAST tools
-(Semgrep, Gitleaks, OSV-Scanner) + data-flow analysis — **no LLM calls, €0 per scan**.
+(Opengrep, Gitleaks, OSV-Scanner) + data-flow analysis — **no LLM calls, €0 per scan**.
 
 This guide covers using the **public** building blocks from this repo. The hosted dashboard and the
 product core are closed source.
