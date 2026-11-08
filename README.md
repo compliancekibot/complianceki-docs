@@ -53,7 +53,7 @@ evidence = client.get_evidence_chain(run_id=run.id)
 
 Scan a file or the whole workspace and see ComplianceKI findings as inline diagnostics.
 
-1. Install the `.vsix` from the [releases](../../releases) page (or `code --install-extension`).
+1. Install the `.vsix` from the [releases](https://github.com/compliancekibot/complianceki-docs/releases) page (or `code --install-extension`).
 2. Run **`ComplianceKI: Set API Key`** then **`ComplianceKI: Scan Workspace`** / **`Scan File`**.
 3. Findings appear in the Problems panel, linked back to your `base_url`.
 
